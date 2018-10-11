@@ -1,0 +1,16 @@
+[v-cloak] {
+    display: none;
+}
+.window {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
