@@ -26,7 +26,7 @@ let app = new Vue({
         showList: function() {
             return this.view == 'list';
         }
-    }
+    },
 
     methods: {
         setList: function() {
