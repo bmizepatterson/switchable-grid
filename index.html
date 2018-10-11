@@ -31,15 +31,14 @@
             <div v-if="showList" id="list" key="list">
                 <ul v-if="cats" class="p-0 list-unstyled">
                     <li v-for="cat in cats" class="mb-3">
-                        <div class="window mr-2" v-bind:style="{ backgroundImage: 'url(' + cat.url + ')'}"></div>
-                        <a v-bind:href="cat.url" target="_blank">{{ cat.url }}</a>
+                        <div class="window mr-2" v-bind:style="{ backgroundImage: 'url(' + cat.url + ')'}"><a v-bind:href="cat.url" target="_blank"></a></div>
                     </li>
                 </ul>
             </div>
 
             <div v-if="showGrid" id="grid" key="grid">
                 <div class="d-flex flex-wrap justify-content-between">
-                    <div class="window mb-3" v-for="cat in cats" v-bind:style="{ backgroundImage: 'url(' + cat.url + ')'}"></div>
+                    <div class="window mb-3" v-for="cat in cats" v-bind:style="{ backgroundImage: 'url(' + cat.url + ')'}"><a v-bind:href="cat.url" target="_blank"></a></div>
                 </div>
             </div>
         </transition>
