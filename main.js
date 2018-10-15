@@ -7,7 +7,8 @@ let app = new Vue({
         req: new XMLHttpRequest(),
         gifs: null,
         query: '',
-        apiKey: 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N'
+        apiKey: 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N',
+        error: false
     },
 
     created: function() {
@@ -57,7 +58,7 @@ let app = new Vue({
         },
 
         onError: function() {
-            console.log("oops!");
+            this.error = true;
         },
 
         onSuccess: function() {
@@ -76,6 +77,7 @@ let app = new Vue({
             url += 'api_key=' + this.apiKey;
             this.req.open('get', url, true);
             this.req.send();
+            console.log('headers', this.req.getAllResponseHeaders());
         }, 500),
 
 

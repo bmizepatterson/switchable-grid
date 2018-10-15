@@ -9,10 +9,13 @@
     <title>Oh my GIF!</title>
 </head>
 <body class="container text-light">
-    <h1 class="mt-5 mb-5">Oh my GIF! <small class="text-muted">Trending GIFs from <a href="https://giphy.com/" target="_blank">GIPHY</a></small></h1>
+    <h1 class="mt-5 mb-5">Oh my GIF!
+        <small class="text-muted">Trending GIFs from <a href="https://giphy.com/" target="_blank">GIPHY</a></small>
+    </h1>
 
     <div id="app" v-cloak>
         <nav class="nav nav-pills justify-content-between mb-5">
+
             <input @input="search" class="search-box" type="text" placeholder="search GIFs">
 
             <div>
@@ -33,18 +36,34 @@
 
         <p v-if="noResults" class="alert alert-warning">No GIFs found... 😭</p>
 
+        <p v-if="error" class="alert alert-danger">I'm having trouble connecting. Is GIPHY mad at me?? 😰</p>
+
         <transition name="fade" mode="out-in" appear>
             <div v-if="showList" id="list" key="list">
                 <ul v-if="gifs" class="p-0 list-unstyled">
+
                     <li v-for="gif in gifs" class="mb-5" :style="{ height: gif.images.fixed_width.height + 'px' }">
+
                         <div class="window mr-2" v-bind:style="{ backgroundImage: 'url(' + gif.images.fixed_width.url + ')', height: gif.images.fixed_width.height + 'px'}">
                             <a v-bind:href="gif.url" target="_blank"></a>
                         </div>
+
                         <table class="details">
-                            <tr v-if="gif.title"><th>Title:</th><td><a :href="gif.url" target="_blank">{{ gif.title }}</a></td></tr>
-                            <tr v-if="gif.source"><th>Source:</th><td>{{ gif.source }}</td></tr>
-                            <tr v-if="gif.trending_datetime"><th>Trending:</th><td>{{ gif.trending_datetime }}</td></tr>
-                            <tr v-if="gif.user"><th>User:</th><td><a :href="gif.user.profile_url" target="_blank">{{ gif.user.display_name }}</a></td></tr>
+                            <tr v-if="gif.title">
+                                <th>Title:</th>
+                                <td><a :href="gif.url" target="_blank">{{ gif.title }}</a></td>
+                            </tr>
+                            <tr v-if="gif.source">
+                                <th>Source:</th><td>{{ gif.source }}</td>
+                            </tr>
+                            <tr v-if="gif.trending_datetime">
+                                <th>Trending:</th>
+                                <td>{{ gif.trending_datetime }}</td>
+                            </tr>
+                            <tr v-if="gif.user">
+                                <th>User:</th>
+                                <td><a :href="gif.user.profile_url" target="_blank">{{ gif.user.display_name }}</a></td>
+                            </tr>
                         </table>
                     </li>
                 </ul>
@@ -52,7 +71,7 @@
 
             <div v-if="showGrid" id="grid" key="grid">
                 <div class="d-flex flex-wrap justify-content-between">
-                    <div class="window mb-3" v-for="gif in gifs" v-bind:style="{ backgroundImage: 'url(' + gif.images.fixed_width.url + ')'}"><a v-bind:href="gif.url" target="_blank"></a></div>
+                    <div class="window mb-3 mr-3" v-for="gif in gifs" v-bind:style="{ backgroundImage: 'url(' + gif.images.fixed_width.url + ')'}"><a v-bind:href="gif.url" target="_blank"></a></div>
                 </div>
             </div>
         </transition>
