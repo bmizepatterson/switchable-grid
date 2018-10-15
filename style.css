@@ -1,5 +1,17 @@
+body {
+    background-color: black;
+}
 [v-cloak] {
     display: none;
+}
+.nav-link {
+    display: initial;
+}
+.search-box {
+    border: 0;
+    border-radius: 2px;
+    padding: 4px 8px;
+    outline: none;
 }
 .window {
     display: inline-block;
@@ -8,6 +20,10 @@
     background-size: cover;
     background-position: center;
     border-radius: 2px;
+    transition: 0.1s;
+}
+.window:hover {
+    transform: scale(1.1);
 }
 .window a {
     display: inline-block;
@@ -37,4 +53,8 @@
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.giphy-attr {
+    margin:40px auto;
+    display:block;
 }

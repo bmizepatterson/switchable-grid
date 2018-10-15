@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="style.css">
     <title>Oh my GIF!</title>
 </head>
-<body class="container bg-dark text-light">
-    <h1 class="mt-5">Oh my GIF!</h1>
+<body class="container text-light">
+    <h1 class="mt-5 mb-5">Oh my GIF! <small class="text-muted">Trending GIFs from <a href="https://giphy.com/" target="_blank">GIPHY</a></small></h1>
 
     <div id="app" v-cloak>
-        <nav class="nav nav-pills justify-content-end mb-3">
+        <nav class="nav nav-pills justify-content-between mb-5">
+            <input @input="search" class="search-box" type="text" placeholder="search GIFs">
+
+            <div>
                 <a v-on:click="setGrid"
                     href="#"
                     class="nav-link"
@@ -24,8 +27,11 @@
                     class="nav-link"
                     v-bind:class="{active: showList}"
                 ><i class="fas fa-th-list"></i></a>
+            </div>
 
         </nav>
+
+        <p v-if="noResults" class="alert alert-warning">No GIFs found... 😭</p>
 
         <transition name="fade" mode="out-in" appear>
             <div v-if="showList" id="list" key="list">
@@ -35,10 +41,10 @@
                             <a v-bind:href="gif.url" target="_blank"></a>
                         </div>
                         <table class="details">
-                            <tr><th>Title:</th><td><a :href="gif.url" target="_blank">{{ gif.title }}</a></td></tr>
+                            <tr v-if="gif.title"><th>Title:</th><td><a :href="gif.url" target="_blank">{{ gif.title }}</a></td></tr>
                             <tr v-if="gif.source"><th>Source:</th><td>{{ gif.source }}</td></tr>
-                            <tr><th>Trending:</th><td>{{ gif.trending_datetime }}</td></tr>
-                            <tr><th>User:</th><td><a :href="gif.user.profile_url" target="_blank">{{ gif.user.display_name }}</a></td></tr>
+                            <tr v-if="gif.trending_datetime"><th>Trending:</th><td>{{ gif.trending_datetime }}</td></tr>
+                            <tr v-if="gif.user"><th>User:</th><td><a :href="gif.user.profile_url" target="_blank">{{ gif.user.display_name }}</a></td></tr>
                         </table>
                     </li>
                 </ul>
@@ -53,6 +59,9 @@
 
     </div>
 
+    <a href="https://giphy.com/" target="_blank"><img class="giphy-attr" src="PoweredByGIPHY.gif" width="200" height="42"></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

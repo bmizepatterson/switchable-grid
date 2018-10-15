@@ -5,19 +5,18 @@ let app = new Vue({
     data: {
         view: localStorage.getItem("view"),
         req: new XMLHttpRequest(),
-        gifs: null
+        gifs: null,
+        query: '',
+        apiKey: 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N'
     },
 
     created: function() {
         let savedView = localStorage.getItem("view");
         if (savedView) this.view = savedView;
 
-        let apiKey = 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N';
-        let url = 'https://api.giphy.com/v1/gifs/trending?api_key=' + apiKey;
         this.req.onload = this.onSuccess;
         this.req.onerror = this.onError;
-        this.req.open('get', url, true);
-        this.req.send();
+        this.makeRequest();
     },
 
     computed: {
@@ -28,6 +27,18 @@ let app = new Vue({
 
         showList: function() {
             return this.view == 'list';
+        },
+
+        baseUrl: function() {
+            if (this.query) {
+                return 'https://api.giphy.com/v1/gifs/search?';
+            } else {
+                return 'https://api.giphy.com/v1/gifs/trending?';
+            }
+        },
+
+        noResults: function() {
+            return this.query && !this.gifs.length;
         }
     },
 
@@ -52,10 +63,25 @@ let app = new Vue({
         onSuccess: function() {
             if (this.req.status == '200') {
                 this.gifs = JSON.parse(this.req.responseText).data;
-                console.log(this.gifs);
             } else {
                 this.onError();
             }
+        },
+
+        makeRequest: _.debounce(function() {
+            let url = this.baseUrl;
+            if (this.query) {
+                url += `q=${this.query}&`;
+            }
+            url += 'api_key=' + this.apiKey;
+            this.req.open('get', url, true);
+            this.req.send();
+        }, 500),
+
+
+        search: function(event) {
+            this.query = event.target.value;
+            this.makeRequest();
         }
     }
 })
