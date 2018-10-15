@@ -5,15 +5,15 @@ let app = new Vue({
     data: {
         view: 'grid',
         req: new XMLHttpRequest(),
-        cats: null
+        gifs: null
     },
 
     created: function() {
-        let url = 'https://api.thecatapi.com/v1/images/search?limit=20';
+        let apiKey = 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N';
+        let url = 'https://api.giphy.com/v1/gifs/trending?api_key=' + apiKey;
         this.req.onload = this.onSuccess;
         this.req.onerror = this.onError;
         this.req.open('get', url, true);
-        this.req.setRequestHeader('x-api-key', '4d086965-1598-4e2b-a0fb-03187990168b');
         this.req.send();
     },
 
@@ -47,7 +47,8 @@ let app = new Vue({
 
         onSuccess: function() {
             if (this.req.status == '200') {
-                this.cats = JSON.parse(this.req.responseText);
+                this.gifs = JSON.parse(this.req.responseText).data;
+                console.log(this.gifs);
             } else {
                 this.onError();
             }

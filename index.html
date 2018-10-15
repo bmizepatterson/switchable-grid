@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Vue Switchable Grid</title>
+    <title>Oh my GIF!</title>
 </head>
-<body class="container">
-    <h1 class="mt-5">Cats!</h1>
+<body class="container bg-dark text-light">
+    <h1 class="mt-5">Oh my GIF!</h1>
 
     <div id="app" v-cloak>
         <nav class="nav nav-pills justify-content-end mb-3">
@@ -29,16 +29,24 @@
 
         <transition name="fade" mode="out-in" appear>
             <div v-if="showList" id="list" key="list">
-                <ul v-if="cats" class="p-0 list-unstyled">
-                    <li v-for="cat in cats" class="mb-3">
-                        <div class="window mr-2" v-bind:style="{ backgroundImage: 'url(' + cat.url + ')'}"><a v-bind:href="cat.url" target="_blank"></a></div>
+                <ul v-if="gifs" class="p-0 list-unstyled">
+                    <li v-for="gif in gifs" class="mb-5" :style="{ height: gif.images.fixed_width.height + 'px' }">
+                        <div class="window mr-2" v-bind:style="{ backgroundImage: 'url(' + gif.images.fixed_width.url + ')', height: gif.images.fixed_width.height + 'px'}">
+                            <a v-bind:href="gif.url" target="_blank"></a>
+                        </div>
+                        <table class="details">
+                            <tr><th>Title:</th><td><a :href="gif.url" target="_blank">{{ gif.title }}</a></td></tr>
+                            <tr v-if="gif.source"><th>Source:</th><td>{{ gif.source }}</td></tr>
+                            <tr><th>Trending:</th><td>{{ gif.trending_datetime }}</td></tr>
+                            <tr><th>User:</th><td><a :href="gif.user.profile_url" target="_blank">{{ gif.user.display_name }}</a></td></tr>
+                        </table>
                     </li>
                 </ul>
             </div>
 
             <div v-if="showGrid" id="grid" key="grid">
                 <div class="d-flex flex-wrap justify-content-between">
-                    <div class="window mb-3" v-for="cat in cats" v-bind:style="{ backgroundImage: 'url(' + cat.url + ')'}"><a v-bind:href="cat.url" target="_blank"></a></div>
+                    <div class="window mb-3" v-for="gif in gifs" v-bind:style="{ backgroundImage: 'url(' + gif.images.fixed_width.url + ')'}"><a v-bind:href="gif.url" target="_blank"></a></div>
                 </div>
             </div>
         </transition>

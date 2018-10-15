@@ -1,20 +1,36 @@
 [v-cloak] {
     display: none;
 }
-#list li {
-    text-align: center;
-}
 .window {
     display: inline-block;
     width: 120px;
     height: 120px;
     background-size: cover;
     background-position: center;
+    border-radius: 2px;
 }
 .window a {
     display: inline-block;
     width: 100%;
     height:100%;
+}
+#list .window {
+    float:left;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: top;
+    width: 200px;
+    height: 200px;
+}
+#list li {
+}
+.details {
+    margin-left: 220px;
+    font-size: 0.8rem;
+}
+.details th {
+    padding-right: 1rem;
+    vertical-align: top;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
