@@ -3,12 +3,15 @@ let app = new Vue({
     el: "#app",
 
     data: {
-        view: 'grid',
+        view: localStorage.getItem("view"),
         req: new XMLHttpRequest(),
         gifs: null
     },
 
     created: function() {
+        let savedView = localStorage.getItem("view");
+        if (savedView) this.view = savedView;
+
         let apiKey = 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N';
         let url = 'https://api.giphy.com/v1/gifs/trending?api_key=' + apiKey;
         this.req.onload = this.onSuccess;
@@ -39,6 +42,7 @@ let app = new Vue({
 
         setView: function(view) {
             this.view = view;
+            localStorage.setItem("view", view);
         },
 
         onError: function() {
