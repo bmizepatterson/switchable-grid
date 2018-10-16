@@ -3,7 +3,7 @@ let app = new Vue({
     el: "#app",
 
     data: {
-        view: localStorage.getItem("view"),
+        view: 'grid',
         req: new XMLHttpRequest(),
         gifs: null,
         query: '',
@@ -16,6 +16,9 @@ let app = new Vue({
     created: function() {
         let savedView = localStorage.getItem("view");
         if (savedView) this.view = savedView;
+
+        let savedPageSize = localStorage.getItem("pageSize");
+        if (savedPageSize) this.pageSize = savedPageSize;
 
         this.req.onload = this.onSuccess;
         this.req.onerror = this.onError;
@@ -57,6 +60,11 @@ let app = new Vue({
         setView: function(view) {
             this.view = view;
             localStorage.setItem("view", view);
+        },
+
+        setPageSize: function(event) {
+            localStorage.setItem("pageSize", event.target.value);
+            this.makeRequest();
         },
 
         onError: function() {

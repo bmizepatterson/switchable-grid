@@ -18,7 +18,7 @@
 
             <div class="form-inline">
                 <input @input="search" class="form-control mr-2" type="text" placeholder="search GIFs">
-                <select v-model="pageSize" @change="makeRequest" class="form-control">
+                <select v-model="pageSize" @input="setPageSize" class="form-control">
                     <option selected>5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
