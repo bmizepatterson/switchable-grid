@@ -10,7 +10,8 @@ let app = new Vue({
         apiKey: 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N',
         error: false,
         reqCount: 0,
-        pageSize: 5
+        pageSize: 5,
+        mode: 'gifs'
     },
 
     created: function() {
@@ -19,6 +20,10 @@ let app = new Vue({
 
         let savedPageSize = localStorage.getItem("pageSize");
         if (savedPageSize) this.pageSize = savedPageSize;
+
+        let savedMode = localStorage.getItem("mode");
+        if (savedMode) this.mode = savedMode;
+
 
         this.req.onload = this.onSuccess;
         this.req.onerror = this.onError;
@@ -37,9 +42,9 @@ let app = new Vue({
 
         baseUrl: function() {
             if (this.query) {
-                return 'https://api.giphy.com/v1/gifs/search?';
+                return 'https://api.giphy.com/v1/' + this.mode + '/search?';
             } else {
-                return 'https://api.giphy.com/v1/gifs/trending?';
+                return 'https://api.giphy.com/v1/' + this.mode + '/trending?';
             }
         },
 
@@ -62,7 +67,25 @@ let app = new Vue({
             localStorage.setItem("view", view);
         },
 
+        setGifMode: function() {
+            this.setMode('gifs');
+        },
+
+        setStickerMode: function() {
+            this.setMode('stickers');
+        },
+
+        setMode: function(mode) {
+            if (mode == this.mode) return;
+
+            this.mode = mode;
+            localStorage.setItem("mode", mode);
+            this.makeRequest();
+        },
+
         setPageSize: function(event) {
+            if (this.pageSize == event.target.value) return;
+
             localStorage.setItem("pageSize", event.target.value);
             this.makeRequest();
         },

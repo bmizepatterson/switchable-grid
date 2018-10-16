@@ -17,25 +17,33 @@
         <nav class="nav nav-pills justify-content-between mb-5">
 
             <div class="form-inline">
-                <input v-model="query" @input="makeRequest" class="form-control mr-2" type="text" placeholder="search GIFs">
-                <select v-model="pageSize" @input="setPageSize" class="form-control">
+                <input v-model="query" @input="makeRequest" class="form-control mr-3" type="text" placeholder="search GIFs">
+                <select v-model="pageSize" @input="setPageSize" class="form-control mr-3">
                     <option selected>5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
                 </select>
+                <div class="form-check-inline">
+                    <input v-model="mode" @click="setGifMode" type="radio" id="mode_gifs" class="form-check-input" name="mode" value="gifs" checked>
+                    <label class="form-check-label" for="mode_gifs">GIFs</label>
+                </div>
+                <div class="form-check-inline">
+                    <input v-model="mode" @click="setStickerMode" type="radio" id="mode_stickers" class="form-check-input" name="mode" value="stickers">
+                    <label class="form-check-label" for="mode_stickers">stickers</label>
+                </div>
             </div>
 
 
             <div>
-                <a v-on:click="setGrid"
+                <a @click="setGrid"
                     href="#"
                     class="nav-link"
                     v-bind:class="{active: showGrid}"
                 ><i class="fas fa-th"></i></a>
 
-                <a v-on:click="setList"
+                <a @click="setList"
                     href="#"
                     class="nav-link"
                     v-bind:class="{active: showList}"
