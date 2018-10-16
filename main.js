@@ -89,13 +89,7 @@ let app = new Vue({
             this.req.open('get', url, true);
             this.req.send();
             this.reqCount++;
-        }, 500),
-
-
-        search: function(event) {
-            this.query = event.target.value;
-            this.makeRequest();
-        }
+        }, 500)
     }
 })
 
