@@ -16,7 +16,17 @@
     <div id="app" v-cloak>
         <nav class="nav nav-pills justify-content-between mb-5">
 
-            <input @input="search" class="search-box" type="text" placeholder="search GIFs">
+            <div class="form-inline">
+                <input @input="search" class="form-control mr-2" type="text" placeholder="search GIFs">
+                <select v-model="pageSize" @change="makeRequest" class="form-control">
+                    <option selected>5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>
+            </div>
+
 
             <div>
                 <a v-on:click="setGrid"

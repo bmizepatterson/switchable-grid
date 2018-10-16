@@ -8,7 +8,9 @@ let app = new Vue({
         gifs: null,
         query: '',
         apiKey: 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N',
-        error: false
+        error: false,
+        reqCount: 0,
+        pageSize: 5
     },
 
     created: function() {
@@ -75,9 +77,10 @@ let app = new Vue({
                 url += `q=${this.query}&`;
             }
             url += 'api_key=' + this.apiKey;
+            url += '&limit=' + this.pageSize;
             this.req.open('get', url, true);
             this.req.send();
-            console.log('headers', this.req.getAllResponseHeaders());
+            this.reqCount++;
         }, 500),
 
 

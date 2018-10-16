@@ -7,12 +7,6 @@ body {
 .nav-link {
     display: initial;
 }
-.search-box {
-    border: 0;
-    border-radius: 2px;
-    padding: 4px 8px;
-    outline: none;
-}
 .window {
     display: inline-block;
     width: 120px;
