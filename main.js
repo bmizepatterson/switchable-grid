@@ -6,7 +6,7 @@ let app = new Vue({
         view: 'grid',
         req: new XMLHttpRequest(),
         gifs: null,
-        query: '',
+        queryInput: '',
         apiKey: 'lr7xVquFU0B9lugQ0Paur26Ckg89Cr1N',
         error: false,
         reqCount: 0,
@@ -50,6 +50,12 @@ let app = new Vue({
 
         noResults: function() {
             return this.query && !this.gifs.length;
+        },
+
+        query: function() {
+            if (!this.queryInput) return '';
+
+            return encodeURI(this.queryInput.trim());
         }
     },
 
