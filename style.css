@@ -40,6 +40,19 @@ body {
     padding-right: 1rem;
     vertical-align: top;
 }
+@media screen and (max-width: 600px) {
+    #list li {
+        text-align: center;
+        height: unset;
+    }
+    #list .window {
+        float: none;
+    }
+    .details {
+        margin-left: initial;
+        text-align: initial;
+    }
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
