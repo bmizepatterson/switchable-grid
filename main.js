@@ -13,15 +13,9 @@ let app = new Vue({
     },
 
     created: function() {
-        let savedView = localStorage.getItem("view");
-        if (savedView) this.view = savedView;
-
-        let savedPageSize = localStorage.getItem("pageSize");
-        if (savedPageSize) this.pageSize = savedPageSize;
-
-        let savedMode = localStorage.getItem("mode");
-        if (savedMode) this.mode = savedMode;
-
+        if (localStorage.view) this.view = localStorage.view;
+        if (localStorage.pageSize) this.pageSize = localStorage.pageSize;
+        if (localStorage.mode) this.mode = localStorage.mode;
         this.makeRequest();
     },
 
